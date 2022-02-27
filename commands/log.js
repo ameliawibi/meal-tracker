@@ -69,4 +69,49 @@ export class Log {
     console.log(`meal ${Number(indexNum.meal)} is removed`);
     console.log("----------------");
   };
+
+  editMeal = async () => {
+    const values = await inquirer.prompt([
+      {
+        type: "number",
+        name: "index",
+        message:
+          "Enter the id number which you want to edit from meal table ==> "
+            .cyan,
+      },
+      {
+        type: "list",
+        name: "column_name",
+        message: "Choose the column name ==> ".cyan,
+        choices: [
+          "type",
+          "description",
+          "amount_of_alcohol",
+          "was_hungry_before_eating",
+        ],
+      },
+      {
+        type: "input",
+        name: "column_value",
+        message: "Enter the new value ==> ".cyan,
+      },
+    ]);
+
+    let sqlQuery = "UPDATE meals SET ($2)=($3),created_at=($4) WHERE id=($1)";
+
+    let inputData = [
+      values.index,
+      values.column_name,
+      values.column_value,
+      now,
+    ];
+    console.log(inputData);
+    console.log(sqlQuery);
+
+    client.query(sqlQuery, inputData, whenQueryDone);
+
+    console.log("----------------");
+    console.log(`Meal ${values.index} is updated`);
+    console.log("----------------");
+  };
 }
