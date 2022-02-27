@@ -97,18 +97,19 @@ export class Log {
       },
     ]);
 
-    let sqlQuery = "UPDATE meals SET ($2)=($3),created_at=($4) WHERE id=($1)";
-
     let inputData = [
       values.index,
       values.column_name,
       values.column_value,
       now,
     ];
+
+    let sqlQuery = `UPDATE public.meals SET "${inputData[1]}"='${inputData[2]}',"created_at"='${inputData[3]}' WHERE id=${inputData[0]};`;
+
     console.log(inputData);
     console.log(sqlQuery);
 
-    client.query(sqlQuery, inputData, whenQueryDone);
+    client.query(sqlQuery, whenQueryDone);
 
     console.log("----------------");
     console.log(`Meal ${values.index} is updated`);
