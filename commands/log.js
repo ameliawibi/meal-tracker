@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import colors from "colors";
 import { client, whenQueryDone } from "../index.js";
 
-const now = new Date();
+const now = new Date().toISOString().slice(0, 19).replace("T", " ");
 
 export class Log {
   addMeal = async () => {

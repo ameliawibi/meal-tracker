@@ -1,6 +1,6 @@
 import { client, whenQueryDone } from "../index.js";
 
-const now = new Date();
+const now = new Date().toISOString().slice(0, 19).replace("T", " ");
 
 let sqlQuery = `DROP TABLE IF EXISTS meals;
 CREATE TABLE meals (

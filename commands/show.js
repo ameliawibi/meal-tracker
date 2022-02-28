@@ -37,4 +37,9 @@ export class Show {
 
     client.query(sqlQuery, whenQueryDone);
   };
+  showDrink = async () => {
+    let sqlQuery =
+      "SELECT type,COUNT(*) AS nbr, (AVG(amount_of_alcohol)) AS avg_alcohol FROM meals GROUP BY type ORDER BY avg_alcohol DESC;";
+    client.query(sqlQuery, whenQueryDone);
+  };
 }

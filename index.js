@@ -27,10 +27,7 @@ export const whenQueryDone = (err, result) => {
         }
 
         // this is the output
-        console.log(
-          `${report.id}. ${report.type} - ${report.description} - ${report.amount_of_alcohol} - ${hungerState} - ${report.created_at}`
-        );
-        console.log("----------------");
+        console.table(result.rows);
       });
     }
   }
