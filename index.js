@@ -25,10 +25,10 @@ export const whenQueryDone = (err, result) => {
         } else {
           hungerState = "not hungry";
         }
-
-        // this is the output
-        console.table(result.rows);
       });
+
+      // this is the output
+      console.table(result.rows);
     }
   }
   client.end();
