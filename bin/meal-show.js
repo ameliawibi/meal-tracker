@@ -1,5 +1,10 @@
-import { client, whenQueryDone } from "../index.js";
+import { program } from "commander";
+import { Show } from "../commands/show.js";
 
-let sqlQuery = "SELECT * FROM meals;";
+const show = new Show();
 
-client.query(sqlQuery, whenQueryDone);
+program.command("all").description("Show all").action(show.showAll);
+
+program.command("filter").description("Show filtered").action(show.showFilter);
+
+program.parse(process.argv);
