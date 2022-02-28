@@ -38,7 +38,7 @@ export class Log {
       values.description,
       Number(values.alcohol),
       values.hungry,
-      now,
+      `${now}`,
     ];
     //console.log(inputData);
     //console.log(sqlQuery);

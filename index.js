@@ -18,19 +18,21 @@ export const whenQueryDone = (err, result) => {
     //console.log(result.rows);
     // here we are customising the report output format
     let hungerState;
-    result.rows.forEach((report) => {
-      if (report.was_hungry_before_eating === true) {
-        hungerState = "feeling hungry";
-      } else {
-        hungerState = "not hungry";
-      }
+    if (result.rows) {
+      result.rows.forEach((report) => {
+        if (report.was_hungry_before_eating === true) {
+          hungerState = "feeling hungry";
+        } else {
+          hungerState = "not hungry";
+        }
 
-      // this is the output
-      console.log(
-        `${report.id}. ${report.type} - ${report.description} - ${report.amount_of_alcohol} - ${hungerState} - ${report.created_at}`
-      );
-      console.log("----------------");
-    });
+        // this is the output
+        console.log(
+          `${report.id}. ${report.type} - ${report.description} - ${report.amount_of_alcohol} - ${hungerState} - ${report.created_at}`
+        );
+        console.log("----------------");
+      });
+    }
   }
   client.end();
 };
