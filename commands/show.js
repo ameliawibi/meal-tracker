@@ -12,6 +12,14 @@ const yesterday = new Date(new Date() - 1000 * 60 * 60 * 24 * 1)
   .slice(0, 19)
   .replace("T", " ");
 
+function getMonday(d) {
+  d = new Date(d);
+  var day = d.getDay(),
+    diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+}
+const begOfWeek = getMonday(now).toISOString().slice(0, 19).replace("T", " ");
+
 export class Show {
   showAll = async () => {
     let sqlQuery = "SELECT * FROM meals;";
@@ -53,7 +61,7 @@ export class Show {
     client.query(sqlQuery, whenQueryDone);
   };
   showWeekSoFar = async () => {
-    let sqlQuery = `SELECT * FROM meals WHERE created_at BETWEEN '${lastWeek}' AND '${now}';`;
+    let sqlQuery = `SELECT * FROM meals WHERE created_at BETWEEN '${begOfWeek}' AND '${now}';`;
     client.query(sqlQuery, whenQueryDone);
   };
   showPastWeek = async () => {
